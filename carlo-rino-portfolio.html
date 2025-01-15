@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UI/UX Design Portfolio - Carlo Rino Project</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+    background: #f5f5f5;
+    margin: 0;  /* Reset margin */
+    padding: 0; /* Remove padding */
+    min-height: 100vh; /* Ensure full viewport height */
+    position: relative; /* For proper footer positioning */
+}
+
+        /* Navigation Styles */
+        .nav-bar {
+            background: white;
+            padding: 1.2rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+    font-size: 2rem;
+    font-weight: 800;
+    color: #4a148c;
+    text-decoration: none;
+    letter-spacing: -1px;
+    transition: all 0.3s ease;
+    padding: 0.5rem 1rem;
+    position: relative;
+    background: linear-gradient(to right, #4a148c, #7c43bd);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    border: 2px solid transparent;
+}
+
+.logo:hover {
+    transform: translateY(-2px);
+    letter-spacing: 0;
+}
+
+.logo::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(to right, #4a148c, #7c43bd);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s ease;
+}
+
+.logo:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+        }
+
+        .nav-links a:hover {
+            color: #4a148c;
+            background: rgba(74, 20, 140, 0.1);
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+    margin: 80px auto 0;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-bottom: 3rem; /* Add space before footer */
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            color: #4a148c;
+            position: relative;
+            padding: 20px;
+            background: linear-gradient(to right, #f3e5f5, #e1bee7);
+            border-radius: 12px;
+            margin-top: 20px;
+        }
+
+        .header-image {
+            width: 100%;
+            height: 400px;
+            object-fit: contain;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .section {
+            margin-bottom: 40px;
+            padding: 25px;
+            border: 1px solid #e0e0e0;
+            border-radius: 12px;
+            background: #ffffff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .section h2 {
+            color: #4a148c;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #4a148c;
+            padding-bottom: 10px;
+            font-size: 1.8em;
+        }
+
+        /* Feature Cards */
+        .feature-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            padding: 15px;
+        }
+
+        .feature-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 12px;
+            border-left: 4px solid #4a148c;
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .feature-image {
+            width: 100%;
+            height: auto;
+            max-height: 300px;
+            object-fit: contain;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .feature-title {
+            font-weight: bold;
+            color: #4a148c;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        .feature-items {
+            list-style: none;
+        }
+
+        .feature-items li {
+            margin: 12px 0;
+            padding-left: 25px;
+            position: relative;
+            line-height: 1.6;
+        }
+
+        .feature-items li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #4a148c;
+        }
+
+        /* Image Gallery */
+        .image-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+
+        .gallery-image {
+            width: 100%;
+            height: 300px;
+            object-fit: contain;
+            border-radius: 12px;
+            transition: transform 0.3s;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .gallery-image:hover {
+            transform: scale(1.03);
+        }
+
+        /* Video Section */
+        .video-section {
+            margin-top: 40px;
+            padding: 25px;
+            background: #f8f9fa;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .video-container {
+            width: 100%;
+            max-width: 1000px;
+            margin: 20px auto;
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            background: #000;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .video-container video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 8px;
+        }
+
+        .image-description {
+            margin: 10px 0 20px 0;
+            font-size: 0.9em;
+            color: #666;
+            line-height: 1.4;
+            padding: 0 10px;
+            text-align: center;
+            font-style: italic;
+        }
+
+        /* Project Details */
+        .project-intro {
+            text-align: left;
+            margin-bottom: 30px;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .project-details {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+        }
+
+        .project-details h3 {
+            color: #4a148c;
+            margin-bottom: 15px;
+        }
+
+        .project-details ul {
+            list-style: disc;
+            margin-left: 20px;
+        }
+
+        .project-details li {
+            margin-bottom: 10px;
+        }
+
+        /* Footer */
+        .page-footer {
+    background: #4a148c;
+    color: white;
+    width: 100%;
+    padding: 2rem 0;
+    position: relative;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 0 2rem;
+}
+
+.footer-content h3 {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    color: #e1bee7;
+}
+
+.footer-content p {
+    line-height: 1.8;
+    margin-bottom: 0rem;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    color: #e1bee7;
+}
+
+.footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin: 2rem 0;
+}
+
+.footer-links a {
+    color: white;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    transition: all 0.3s ease;
+    border-radius: 6px;
+}
+
+.footer-links a:hover {
+    color: #e1bee7;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-content {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .container {
+                margin-top: 120px;
+                padding: 15px;
+            }
+
+            .feature-list {
+                grid-template-columns: 1fr;
+            }
+
+            .header-image {
+                height: 250px;
+            }
+
+            .gallery-image {
+                height: 200px;
+            }
+
+            .footer-links {
+        flex-direction: column;
+        gap: 1rem;
+        }
+    }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav-bar">
+        <div class="nav-content">
+            <a href="index.html" class="logo">Nissha's Portfolio</a>
+            <div class="nav-links">
+                <a href="index.html#about">About</a>
+                <a href="index.html#portfolio">Portfolio</a>
+                <a href="mailto:nissha2499@gmail.com">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="header">
+            <img src="homepage.png" alt="Carlo Rino UI/UX Design" class="header-image" />
+            <h1>UI/UX Design Competition Entry - Carlo Rino E-Commerce</h1>
+            <p>A modern e-commerce platform design concept</p>
+        </div>
+
+        <div class="section">
+            <div class="project-intro">
+                <h2>Project Overview</h2>
+                <div class="project-details">
+                    <h3>Competition Brief</h3>
+                    <ul>
+                        <li>Design a modern e-commerce platform for Carlo Rino</li>
+                        <li>Focus on user experience and brand identity</li>
+                        <li>Create a responsive and intuitive interface</li>
+                        <li>Incorporate current e-commerce best practices</li>
+                    </ul>
+        
+                    <h3>Design Approach</h3>
+                    <ul>
+                        <li>Conducted user research and competitive analysis</li>
+                        <li>Created user personas and journey maps</li>
+                        <li>Developed wireframes and high-fidelity prototypes</li>
+                        <li>Implemented responsive design principles</li>
+                    </ul>
+        
+                    <h3>Tools & Technologies</h3>
+                    <ul>
+                        <li>Figma - UI/UX design, prototyping, and collaboration</li>
+                        <li>FigJam - User flow diagrams and wireframing</li>
+                        <li>Figma Plugins:
+                            <ul>
+                                <li>Auto Layout - For responsive design</li>
+                                <li>Content Reel - For quick content population</li>
+                                <li>Stark - For accessibility checking</li>
+                                <li>Icon8 - For icon resources</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Prototype Demo</h2>
+            <div class="video-section">
+                <div class="video-container">
+                    <video controls>
+                        <source src="demo.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Core Features</h2>
+            <div class="feature-list">
+                <div class="feature-card">
+                    <div class="feature-title">Homepage</div>
+                    <img src="homepage1.png" alt="Homepage Preview" class="feature-image" />
+                    <p class="image-description">Main homepage featuring a clean, modern design with prominent Carlo Rino branding and easy-to-navigate menu structure.</p>
+                    
+                    <img src="category.png" alt="Homepage Preview" class="feature-image" />
+                    <p class="image-description">Category section showcasing different product categories with intuitive visual navigation and clear categorization.</p>
+                    
+                    <img src="newsletter.png" alt="Homepage Preview" class="feature-image" />
+                    <p class="image-description">Newsletter subscription module with elegant design, offering users exclusive updates and promotional offers.</p>
+                    
+                    <img src="footer.png" alt="Homepage Preview" class="feature-image" />
+                    <p class="image-description">Comprehensive footer section containing important links, company information, and social media connections.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-title">User Authentication</div>
+                    <img src="login.png" alt="Authentication Preview" class="feature-image" />
+                    <p class="image-description">User-friendly login interface with options for email/password login and Google authentication integration.</p>
+                    
+                    <img src="signup.png" alt="Authentication Preview" class="feature-image" />
+                    <p class="image-description">Streamlined sign-up form with clear input fields and validation for new user registration.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-title">Shopping Experience</div>
+                    <img src="filter.png" alt="Shopping Experience" class="feature-image" />
+                    <p class="image-description">Advanced filtering system allowing users to refine product searches by multiple criteria including price, category, and features.</p>
+                    
+                    <img src="wishlist.png" alt="Shopping Experience" class="feature-image" />
+                    <p class="image-description">Personalized wishlist interface where users can save and manage their favorite items for future purchase.</p>
+                    
+                    <img src="cart.png" alt="Shopping Experience" class="feature-image" />
+                    <p class="image-description">Intuitive shopping cart display showing selected items, quantities, and total cost with easy modification options.</p>
+                    
+                    <img src="detail_product.png" alt="Shopping Experience" class="feature-image" />
+                    <p class="image-description">Detailed product page featuring high-quality images, comprehensive product information, and size selection options.</p>
+                    
+                    <img src="reviews.png" alt="Shopping Experience" class="feature-image" />
+                    <p class="image-description">Customer review section displaying user feedback, ratings, and authentic product reviews with photos.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-title">Customer Support</div>
+                    <img src="live_chat.png" alt="Customer Support" class="feature-image" />
+                    <p class="image-description">Real-time chat interface providing instant customer support with professional service representatives.</p>
+                    
+                    <img src="contact.png" alt="Customer Support" class="feature-image" />
+                    <p class="image-description">Comprehensive contact form for customer inquiries and feedback submission with multiple department options.</p>
+                    
+                    <img src="social_media.png" alt="Customer Support" class="feature-image" />
+                    <p class="image-description">Integrated social media links and feeds keeping customers connected with Carlo Rino's latest updates and promotions.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Interface Preview</h2>
+            <div class="image-gallery">
+                <img src="sales.png" alt="Sales" class="gallery-image" />
+                <img src="new_arrivals.png" alt="New Arrival Interface" class="gallery-image" />
+                <img src="highlights.png" alt="Highlights" class="gallery-image" />
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Additional Features</h2>
+            <div class="feature-list">
+                <div class="feature-card">
+                    <div class="feature-title">Security & Privacy</div>
+                    <img src="policy.png" alt="Security Features" class="feature-image" />
+                    <ul class="feature-items">
+                        <li>PDPA compliance</li>
+                        <li>Secure user data protection</li>
+                        <li>Privacy policy implementation</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-title">Membership Benefits</div>
+                    <img src="membership.png" alt="Membership Benefits" class="feature-image" />
+                    <img src="membership1.png" alt="Membership Benefits" class="feature-image" />
+                    <ul class="feature-items">
+                        <li>Tiered membership system</li>
+                        <li>Exclusive member discounts</li>
+                        <li>Special access to collections</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+     <!-- Footer Structure -->
+<footer class="page-footer">
+    <div class="footer-content">
+    
+        
+        <div class="footer-links">
+            <a href="index.html#portfolio">Portfolio</a>
+            <a href="https://www.linkedin.com/in/mnissha">LinkedIn</a>
+            <a href="mailto:nissha2499@gmail.com">Contact</a>
+        </div>
+        
+        <p>&copy; 2025 Nissha - UI/UX Designer</p>
+    </div>
+</footer>
+
+</body>
+</html>
